@@ -60,7 +60,6 @@ const Signup: React.FC = () => {
     }
 
     setPasswordValid(true);
-    navigate('/signin');
   }, [email, password, navigate]);
 
   return (
