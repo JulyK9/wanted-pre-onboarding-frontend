@@ -13,11 +13,6 @@ const Signup: React.FC = () => {
   const SubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
-
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-
     const reqBody = {
       email,
       password,
@@ -31,13 +26,13 @@ const Signup: React.FC = () => {
       body: JSON.stringify(reqBody),
     });
 
-    if (loginRes.ok) {
-      alert('회원가입 성공. 로그인 페이지로 이동합니다.');
-      navigate('/signin');
+    if (!loginRes.ok) {
+      const resData = await loginRes.json();
+      throw new Error(resData.message || '회원가입에 문제가 발생했습니다.');
     }
 
-    const resData = await loginRes.json();
-    throw new Error(resData.message || '회원가입에 문제가 발생했습니다.');
+    alert('회원가입 성공. 로그인 페이지로 이동합니다.');
+    navigate('/signin');
   };
 
   useEffect(() => {
