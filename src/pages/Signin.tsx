@@ -44,7 +44,8 @@ const Signin: React.FC = () => {
     const accessToken = localStorage.getItem('accessToken');
 
     if (accessToken) {
-      return navigate('/todo');
+      navigate('/todo');
+      return;
     }
 
     if (!email || !email.includes('@')) {

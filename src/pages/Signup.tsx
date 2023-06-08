@@ -40,6 +40,7 @@ const Signup: React.FC = () => {
 
     if (acccessToken) {
       navigate('/todo');
+      return;
     }
 
     // validation
