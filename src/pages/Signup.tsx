@@ -10,9 +10,7 @@ const Signup: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const loginSubmitHandler = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const SubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -66,8 +64,8 @@ const Signup: React.FC = () => {
 
   return (
     <div>
-      <h2>로그인</h2>
-      <form onSubmit={loginSubmitHandler}>
+      <h2>회원가입</h2>
+      <form onSubmit={SubmitHandler}>
         <label>
           이메일
           <input
