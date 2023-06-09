@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react';
-import { BASE_URL } from '../api/url';
 import TodoItem from './TodoItem';
 import { TodoItemType } from '../types/index';
 
 interface TodosProps {
   todos: TodoItemType[];
+  handleComplete: (todoItem: TodoItemType) => void;
 }
 
-const TodoList: React.FC<TodosProps> = ({ todos }) => {
+const TodoList: React.FC<TodosProps> = ({ todos, handleComplete }) => {
   return (
     <ul>
-      <TodoItem todos={todos} />
+      <TodoItem todos={todos} handleComplete={handleComplete} />
     </ul>
   );
 };
