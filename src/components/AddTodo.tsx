@@ -1,11 +1,19 @@
 import { BASE_URL } from '../api/url';
+import { TodoItemType } from '../types/index';
 
 interface AddTodoProps {
   todoText: string;
   setTodoText: React.Dispatch<React.SetStateAction<string>>;
+  todos: TodoItemType[];
+  setTodos: React.Dispatch<React.SetStateAction<TodoItemType[]>>;
 }
 
-const AddTodo: React.FC<AddTodoProps> = ({ todoText, setTodoText }) => {
+const AddTodo: React.FC<AddTodoProps> = ({
+  todoText,
+  setTodoText,
+  todos,
+  setTodos,
+}) => {
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -27,7 +35,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ todoText, setTodoText }) => {
     const resData = await response.json();
 
     if (response.ok) {
-      console.log(resData);
+      setTodos([...todos, resData]);
       setTodoText('');
     }
 
