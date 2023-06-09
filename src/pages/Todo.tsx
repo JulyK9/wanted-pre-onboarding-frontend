@@ -58,7 +58,6 @@ const Todo = () => {
     if (response.ok) {
       const updatedList = todos.map((todo) => {
         if (todo.id === todoItem.id) {
-          console.log('data', data);
           return data;
         }
         return todo;
