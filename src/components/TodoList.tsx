@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { BASE_URL } from '../api/url';
+import TodoItem from './TodoItem';
+import { TodoItemType } from '../types/index';
 
-interface todoItem {
-  id: number;
-  todo: string;
-  isCompleted: boolean;
-  userId: number;
-}
+// interface TodoItem {
+//   id: number;
+//   todo: string;
+//   isCompleted: boolean;
+//   userId: number;
+// }
 
 const TodoList: React.FC = () => {
-  const [todos, setTodos] = useState<todoItem[]>();
+  const [todos, setTodos] = useState<TodoItemType[]>([]);
 
   useEffect(() => {
     const access_token = localStorage.getItem('accessToken');
@@ -41,15 +43,7 @@ const TodoList: React.FC = () => {
 
   return (
     <>
-      {todos &&
-        todos.map((todo) => (
-          <li key={todo.id}>
-            <label>
-              <input type="checkbox" />
-              <span>{todo.todo}</span>
-            </label>
-          </li>
-        ))}
+      <TodoItem todos={todos} />
     </>
   );
 };
