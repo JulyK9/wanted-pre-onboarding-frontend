@@ -3,13 +3,6 @@ import { BASE_URL } from '../api/url';
 import TodoItem from './TodoItem';
 import { TodoItemType } from '../types/index';
 
-// interface TodoItem {
-//   id: number;
-//   todo: string;
-//   isCompleted: boolean;
-//   userId: number;
-// }
-
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<TodoItemType[]>([]);
 
