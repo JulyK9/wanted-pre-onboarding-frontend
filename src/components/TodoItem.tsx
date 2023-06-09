@@ -3,9 +3,14 @@ import { TodoItemType } from '../types/index';
 interface TodoItemProps {
   todos: TodoItemType[];
   handleComplete: (todoItem: TodoItemType) => void;
+  handleDelete: (todoItem: TodoItemType) => void;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todos, handleComplete }) => {
+const TodoItem: React.FC<TodoItemProps> = ({
+  todos,
+  handleComplete,
+  handleDelete,
+}) => {
   return (
     <>
       {todos &&
@@ -20,6 +25,15 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos, handleComplete }) => {
               />
               <span>{todo.todo}</span>
             </label>
+            <div>
+              <button data-testid="modify-button">수정</button>
+              <button
+                data-testid="delete-button"
+                onClick={() => handleDelete(todo)}
+              >
+                삭제
+              </button>
+            </div>
           </li>
         ))}
     </>

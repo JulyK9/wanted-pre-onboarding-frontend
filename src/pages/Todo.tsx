@@ -56,17 +56,37 @@ const Todo = () => {
     const data = await response.json();
 
     if (response.ok) {
-      const updatedList = todos.map((todo) => {
+      const updatedTodos = todos.map((todo) => {
         if (todo.id === todoItem.id) {
           return data;
         }
         return todo;
       });
-      setTodos(updatedList);
+      setTodos(updatedTodos);
     }
 
     if (!response.ok) {
       throw new Error(data.message || '업데이트에 문제가 발생했습니다.');
+    }
+  };
+
+  const handleDelete = async (todoItem: TodoItemType) => {
+    const access_token = localStorage.getItem('accessToken');
+
+    const response = await fetch(`${BASE_URL}/todos/${todoItem.id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
+    if (response.ok) {
+      const deletedTodos = todos.filter((todo) => todo.id !== todoItem.id);
+      setTodos(deletedTodos);
+    }
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.message || '정상적으로 삭제되지 않았습니다.');
     }
   };
 
@@ -90,7 +110,11 @@ const Todo = () => {
         setTodos={setTodos}
       />
       <hr />
-      <TodoList todos={todos} handleComplete={handleComplete} />
+      <TodoList
+        todos={todos}
+        handleComplete={handleComplete}
+        handleDelete={handleDelete}
+      />
     </>
   );
 };
