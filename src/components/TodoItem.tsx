@@ -16,10 +16,10 @@ const TodoItem: React.FC<TodoItemProps> = ({
       {todos &&
         todos.map((todo: TodoItemType) => (
           <li key={todo.id}>
-            <label htmlFor="isCompleted">
+            <label htmlFor={todo.id}>
               <input
                 type="checkbox"
-                id="isCompleted"
+                id={todo.id}
                 checked={todo.isCompleted}
                 onChange={() => handleComplete(todo)}
               />
