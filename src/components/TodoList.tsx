@@ -15,18 +15,21 @@ const TodoList: React.FC<TodosProps> = ({
   handleDelete,
 }) => {
   return (
-    <ul>
-      {todos.map((todo: TodoItemType) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          todos={todos}
-          setTodos={setTodos}
-          handleComplete={handleComplete}
-          handleDelete={handleDelete}
-        />
-      ))}
-    </ul>
+    <>
+      <h2 className="w-4/5 text-start mb-2">To Do List</h2>
+      <ul className="w-4/5 flex flex-col gap-3 items-center justify-center">
+        {todos.map((todo: TodoItemType) => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            todos={todos}
+            setTodos={setTodos}
+            handleComplete={handleComplete}
+            handleDelete={handleDelete}
+          />
+        ))}
+      </ul>
+    </>
   );
 };
 

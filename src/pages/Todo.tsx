@@ -100,7 +100,7 @@ const Todo = () => {
   }, [navigate]);
 
   return (
-    <>
+    <main className="w-full flex flex-col justify-center items-center">
       <AddTodo
         todoText={todoText}
         setTodoText={setTodoText}
@@ -114,7 +114,7 @@ const Todo = () => {
         handleComplete={handleComplete}
         handleDelete={handleDelete}
       />
-    </>
+    </main>
   );
 };
 

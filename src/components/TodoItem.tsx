@@ -60,52 +60,113 @@ const TodoItem: React.FC<TodoItemProps> = ({
   };
 
   return (
-    <li key={todo.id}>
-      <label htmlFor={todo.id.toString()}>
+    <li
+      key={todo.id}
+      className="
+      w-full
+      border
+      border-slate-200
+      hover:border-slate-400
+      hover:scale-105
+      rounded-sm
+      px-5
+      py-3
+      flex
+      gap-4
+      justify-between
+      items-center
+      "
+    >
+      <label htmlFor={todo.id.toString()} className="block">
         <input
           type="checkbox"
           id={todo.id.toString()}
           checked={todo.isCompleted}
           onChange={() => handleComplete(todo)}
+          className="mx-2"
         />
+        {isEdit ? (
+          <span className="text-md">{todo.todo}</span>
+        ) : (
+          <input
+            data-testid="modify-input"
+            type="text"
+            value={editTodoText}
+            onChange={(e) => setEditTodoText(e.target.value)}
+            className="
+                focus:outline-zinc-400
+                border
+                px-2
+                py-1
+                rounded-sm
+                border-slate-400"
+          />
+        )}
       </label>
       <div>
         {isEdit && (
-          <>
-            <span>{todo.todo}</span>
+          <div className="flex gap-2">
             <button
               data-testid="modify-button"
               onClick={() => setIsEdit((prev) => !prev)}
+              className="
+              hover:bg-sky-100
+              active:bg-sky-200
+              px-3
+              py-2
+              rounded-md
+              "
             >
               수정
             </button>
             <button
               data-testid="delete-button"
               onClick={() => handleDelete(todo)}
+              className="
+              hover:bg-red-100
+              active:bg-red-200
+              px-3
+              py-2
+              rounded-md
+              "
             >
               삭제
             </button>
-          </>
+          </div>
         )}
         {!isEdit && (
           <form>
-            <label htmlFor={todo.id.toString()}>
+            {/* <label htmlFor={todo.id.toString()}>
               <input
                 data-testid="modify-input"
                 type="text"
                 value={editTodoText}
                 onChange={(e) => setEditTodoText(e.target.value)}
               />
-            </label>
+            </label> */}
             <button
               data-testid="submit-button"
               onClick={(e) => handleUpdate(e, todo)}
+              className="
+              hover:bg-sky-100
+              active:bg-sky-200
+              px-3
+              py-2
+              rounded-md
+              "
             >
               제출
             </button>
             <button
               data-testid="cancel-button"
               onClick={() => setIsEdit((prev) => !prev)}
+              className="
+              hover:bg-red-100
+              active:bg-red-200
+              px-3
+              py-2
+              rounded-md
+              "
             >
               취소
             </button>
