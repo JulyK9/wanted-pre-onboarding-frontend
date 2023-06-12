@@ -39,8 +39,6 @@ const Todo = () => {
       ...todoItem,
       isCompleted: !todoItem.isCompleted,
     };
-    // console.log('reqbody: ', updatedTodoItem);
-    // console.log('todoItem.id: ', todoItem.id);
 
     const access_Token = localStorage.getItem('accessToken');
 
@@ -112,6 +110,7 @@ const Todo = () => {
       <hr />
       <TodoList
         todos={todos}
+        setTodos={setTodos}
         handleComplete={handleComplete}
         handleDelete={handleDelete}
       />
