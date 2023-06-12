@@ -21,6 +21,10 @@ const AddTodo: React.FC<AddTodoProps> = ({
   ) => {
     event.preventDefault();
 
+    if (!todoText) {
+      return;
+    }
+
     const reqbody = {
       todo: todoText,
     };
