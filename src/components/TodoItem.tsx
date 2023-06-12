@@ -23,6 +23,11 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const handleUpdate = async (e: React.FormEvent, todoItem: TodoItemType) => {
     e.preventDefault();
 
+    if (editTodoText === todoItem.todo) {
+      setIsEdit((prev) => !prev);
+      return;
+    }
+
     const editedTodoItem = {
       ...todoItem,
       todo: editTodoText,
@@ -41,7 +46,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
     if (response.ok) {
       const resData = await response.json();
-      console.log('resData: ', resData);
       const editedTodoList = todos.map((todo) => {
         if (todo.id === todoItem.id) {
           return resData;
