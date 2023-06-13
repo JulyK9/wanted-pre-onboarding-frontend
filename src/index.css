@@ -14,4 +14,10 @@
     font-family: 'DM Sans', sans-serif;
     @apply text-neutral-950;
   }
+  input:checked + div {
+    @apply border-gray-500;
+  }
+  input:checked + div svg {
+    @apply block;
+  }
 }

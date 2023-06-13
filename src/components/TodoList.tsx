@@ -16,8 +16,8 @@ const TodoList: React.FC<TodosProps> = ({
 }) => {
   return (
     <>
-      <h2 className="w-4/5 text-start mb-2">To Do List</h2>
-      <ul className="w-4/5 flex flex-col gap-3 items-center justify-center">
+      <h2 className="w-5/6 text-start mb-2">To Do List</h2>
+      <ul className="w-5/6 flex flex-col gap-3 items-center justify-center">
         {todos.map((todo: TodoItemType) => (
           <TodoItem
             key={todo.id}

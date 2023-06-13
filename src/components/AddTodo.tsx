@@ -64,16 +64,19 @@ const AddTodo: React.FC<AddTodoProps> = ({
     <form
       onSubmit={handleSubmit}
       className="
-        mt-5
+        pt-5
         w-full
         text-center
         flex
         flex-col
         items-center
+				sticky
+				top-0
+				bg-white
       "
     >
       <h2 className="text-xl w-full text-center">새로운 할일을 추가해보세요</h2>
-      <div className="flex w-4/5 gap-3 m-5">
+      <div className="flex w-5/6 gap-3 my-5">
         <input
           data-testid="new-todo-input"
           type="text"
@@ -87,7 +90,9 @@ const AddTodo: React.FC<AddTodoProps> = ({
             px-4
             py-3
             rounded-sm
-            border-slate-400"
+            border-slate-400
+						bg-blend-overlay
+						"
         />
         <button
           data-testid="new-todo-add-button"
