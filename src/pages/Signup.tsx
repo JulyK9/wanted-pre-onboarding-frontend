@@ -36,14 +36,13 @@ const Signup: React.FC = () => {
   };
 
   useEffect(() => {
-    const acccessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
 
-    if (acccessToken) {
+    if (accessToken) {
       navigate('/todo');
       return;
     }
 
-    // validation
     if (!email || !email.includes('@')) {
       setEmailValid(false);
       return;

@@ -34,9 +34,9 @@ const Signin: React.FC = () => {
       );
     }
 
-    console.log('resData: ', resData);
     localStorage.setItem('accessToken', resData.access_token);
 
+    alert('로그인 성공. todo 페이지로 이동합니다.');
     navigate('/todo');
   };
 
@@ -58,6 +58,7 @@ const Signin: React.FC = () => {
       setPasswordValid(false);
       return;
     }
+
     setPasswordValid(true);
   }, [email, password, navigate]);
 
