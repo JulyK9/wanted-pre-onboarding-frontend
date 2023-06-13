@@ -1,5 +1,6 @@
 import { BASE_URL } from '../api/url';
 import { TodoItemType } from '../types/index';
+import { BsPlusLg } from 'react-icons/bs';
 
 interface AddTodoProps {
   todoText: string;
@@ -75,7 +76,9 @@ const AddTodo: React.FC<AddTodoProps> = ({
 				bg-white
       "
     >
-      <h2 className="text-xl w-full text-center">새로운 할일을 추가해보세요</h2>
+      <h2 className="text-xl w-full text-center">
+        새로운 할 일을 추가해보세요
+      </h2>
       <div className="flex w-5/6 gap-3 my-5 relative">
         <input
           data-testid="new-todo-input"
@@ -83,11 +86,13 @@ const AddTodo: React.FC<AddTodoProps> = ({
           value={todoText}
           onChange={(e) => setTodoText(e.target.value)}
           onKeyDown={handleOnkeyPress}
+          placeholder="할 일을 작성하고 엔터키나 추가 버튼을 눌러주세요"
           className="
             w-full
             focus:outline-zinc-400
             border
 						focus:shadow-bg-shadow
+						z-10
             px-4
             py-3
             rounded-sm
@@ -98,20 +103,19 @@ const AddTodo: React.FC<AddTodoProps> = ({
           data-testid="new-todo-add-button"
           className="
           min-w-[2rem]
-          border
           px-3
 					py-2
-          rounded-sm
-          border-slate-500
-          hover:bg-slate-100
+					z-20
+          hover:rotate-90
+					active:rotate-180
+					transition
 					absolute
 					right-1
 					top-1
-
-
+					text-slate-400
         "
         >
-          추가
+          <BsPlusLg size={30} />
         </button>
       </div>
     </form>

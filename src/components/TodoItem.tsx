@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { TodoItemType } from '../types/index';
 import { BASE_URL } from '../api/url';
+import { BsTrash } from 'react-icons/bs';
+import { LuEdit } from 'react-icons/lu';
+import { BiMessageSquareCheck, BiMessageSquareX } from 'react-icons/bi';
 
 interface TodoItemProps {
   todo: TodoItemType;
@@ -144,13 +147,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
               className="
               hover:bg-sky-100
               active:bg-sky-200
-              px-3
+              px-2
               py-2
               rounded-md
               text-sm
               "
             >
-              수정
+              <LuEdit size={24} />
             </button>
             <button
               data-testid="delete-button"
@@ -158,13 +161,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
               className="
               hover:bg-red-100
               active:bg-red-200
-              px-3
+              px-2
               py-2
               rounded-md
               text-sm
               "
             >
-              삭제
+              <BsTrash size={24} />
             </button>
           </div>
         )}
@@ -174,30 +177,30 @@ const TodoItem: React.FC<TodoItemProps> = ({
               data-testid="submit-button"
               onClick={(e) => handleUpdate(e, todo)}
               className="
-              hover:bg-sky-100
+              hover:text-sky-500
               active:bg-sky-200
               px-2
-              py-1
+              py-2
               rounded-md
               text-sm
               "
             >
-              제출
+              <BiMessageSquareCheck size={24} />
             </button>
             <button
               data-testid="cancel-button"
               type="button"
               onClick={() => setIsEdit((prev) => !prev)}
               className="
-              hover:bg-red-100
+              hover:text-red-500
               active:bg-red-200
               px-2
-              py-1
+              py-2
               rounded-md
               text-sm
               "
             >
-              취소
+              <BiMessageSquareX size={24} />
             </button>
           </div>
         )}
