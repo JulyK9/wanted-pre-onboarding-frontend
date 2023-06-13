@@ -59,10 +59,13 @@ const Signup: React.FC = () => {
   }, [email, password, navigate]);
 
   return (
-    <div>
-      <h2>회원가입</h2>
-      <form onSubmit={SubmitHandler}>
-        <label>
+    <div className="w-full h-screen flex flex-col items-center justify-center">
+      <h2 className="text-2xl">회원가입</h2>
+      <form
+        onSubmit={SubmitHandler}
+        className="w-2/5 px-10 py-8 flex flex-col items-center justify-center"
+      >
+        <label className="w-full flex flex-col items-start gap-2 mb-3">
           이메일
           <input
             data-testid="email-input"
@@ -72,10 +75,24 @@ const Signup: React.FC = () => {
             placeholder="이메일을 입력하세요"
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="
+              w-full
+              outline-none
+              border
+              border-neutral-400
+              rounded-md
+              px-4
+              py-2
+              focus:border-2
+              focus:border-green-600
+              mb-1
+            "
           />
-          {email && !emailValid && <p>유효하지 않은 이메일 입니다.</p>}
+          {email && !emailValid && (
+            <p className="mb-5  text-red-500">유효하지 않은 이메일 입니다.</p>
+          )}
         </label>
-        <label>
+        <label className="w-full flex flex-col items-start gap-2 mb-5">
           비밀번호
           <input
             data-testid="password-input"
@@ -85,15 +102,48 @@ const Signup: React.FC = () => {
             placeholder="비밀번호를 입력하세요"
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="
+              w-full
+              outline-none
+              border
+              border-neutral-400
+              rounded-md
+              px-4
+              py-2
+              focus:border-2
+              focus:border-green-600
+              mb-1
+            "
           />
           {password && !passwordValid && (
-            <p>비밀번호는 8자 이상이어야 합니다.</p>
+            <p className="mb-3 text-red-500">
+              비밀번호는 8자 이상이어야 합니다.
+            </p>
           )}
         </label>
+        <hr className="w-full border-1 border-zinc-200 shadow-md mb-2" />
         <button
           type="submit"
           data-testid="signup-button"
           disabled={!emailValid || !passwordValid}
+          className={`
+            w-full
+            border
+            border-neutral-400
+            px-2
+            py-3
+            mt-4
+            rounded-md
+            hover:bg-gradient-to-r from-emerald-500 from-10% via-sky-600 via-30% to-indigo-500 to-80% opacity-70
+            hover:text-sky-100
+            hover:border-none
+            hover:shadow-md
+            ${
+              !emailValid || !passwordValid
+                ? 'cursor-not-allowed'
+                : 'cursor-pointer'
+            }
+            `}
         >
           회원가입
         </button>
