@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../api/url';
 import { useEffect, useState } from 'react';
+import { useSignup } from '../hooks/useAuth';
 
 const Signup: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -18,18 +19,22 @@ const Signup: React.FC = () => {
       password,
     };
 
-    const loginRes = await fetch(`${BASE_URL}/auth/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(reqBody),
-    });
+    const reqUrl = `${BASE_URL}/auth/signup`;
 
-    if (!loginRes.ok) {
-      const resData = await loginRes.json();
-      throw new Error(resData.message || '회원가입에 문제가 발생했습니다.');
-    }
+    useSignup(reqBody, reqUrl);
+
+    // const loginRes = await fetch(`${BASE_URL}/auth/signup`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(reqBody),
+    // });
+
+    // if (!loginRes.ok) {
+    //   const resData = await loginRes.json();
+    //   throw new Error(resData.message || '회원가입에 문제가 발생했습니다.');
+    // }
 
     alert('회원가입 성공. 로그인 페이지로 이동합니다.');
     navigate('/signin');

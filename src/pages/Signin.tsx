@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from 'react';
 import { BASE_URL } from '../api/url';
 import { useNavigate } from 'react-router-dom';
+import { useLogin } from '../hooks/useAuth';
 
 const Signin: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -18,23 +20,11 @@ const Signin: React.FC = () => {
       password,
     };
 
-    const loginRes = await fetch(`${BASE_URL}/auth/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(reqBody),
-    });
+    const reqUrl = `${BASE_URL}/auth/signin`;
 
-    const resData = await loginRes.json();
+    const resData = await useLogin(reqBody, reqUrl);
 
-    if (!loginRes.ok) {
-      throw new Error(
-        resData.message || '로그인이 정상적으로 완료되지 않았습니다.'
-      );
-    }
-
-    localStorage.setItem('accessToken', resData.access_token);
+    localStorage.setItem('accessToken', resData?.access_token);
 
     alert('로그인 성공. todo 페이지로 이동합니다.');
     navigate('/todo');
