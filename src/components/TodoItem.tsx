@@ -20,7 +20,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleComplete,
   handleDelete,
 }) => {
-  const [isEdit, setIsEdit] = useState<boolean>(true);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editTodoText, setEditTodoText] = useState<string>(todo.todo);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -87,8 +87,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
       gap-2
       justify-between
       items-center
-      ${isEdit ? 'shadow-none' : 'shadow-md'}
-      ${isEdit ? '' : 'translate-x-4'}
+      ${isEdit ? 'shadow-md' : 'shadow-none'}
+      ${isEdit ? 'translate-x-4' : ''}
       `}
     >
       <label
@@ -116,16 +116,20 @@ const TodoItem: React.FC<TodoItemProps> = ({
             </g>
           </svg>
         </div>
-        {isEdit ? (
-          <span className="text-md px-2 ml-1 w-fit truncate">{todo.todo}</span>
-        ) : (
-          <input
-            data-testid="modify-input"
-            type="text"
-            value={editTodoText}
-            ref={inputRef}
-            onChange={(e) => setEditTodoText(e.target.value)}
-            className={`
+        <div className="w-full flex justify-between items-center">
+          <div className="w-full">
+            {!isEdit ? (
+              <span className="text-md px-2 ml-1 w-fit truncate">
+                {todo.todo}
+              </span>
+            ) : (
+              <input
+                data-testid="modify-input"
+                type="text"
+                value={editTodoText}
+                ref={inputRef}
+                onChange={(e) => setEditTodoText(e.target.value)}
+                className={`
               bg-white
               focus:bg-neutral-100
               w-full
@@ -135,16 +139,16 @@ const TodoItem: React.FC<TodoItemProps> = ({
               py-2
               outline-none
               `}
-          />
-        )}
-      </label>
-      <div className="min-w-fit">
-        {isEdit && (
-          <div className="flex gap-1 w-full">
-            <button
-              data-testid="modify-button"
-              onClick={() => setIsEdit((prev) => !prev)}
-              className="
+              />
+            )}
+          </div>
+          <div className="min-w-fit">
+            {!isEdit && (
+              <div className="flex gap-1 w-full">
+                <button
+                  data-testid="modify-button"
+                  onClick={() => setIsEdit((prev) => !prev)}
+                  className="
               hover:bg-sky-100
               active:bg-sky-200
               px-2
@@ -152,13 +156,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
               rounded-md
               text-sm
               "
-            >
-              <LuEdit size={24} />
-            </button>
-            <button
-              data-testid="delete-button"
-              onClick={() => handleDelete(todo)}
-              className="
+                >
+                  <LuEdit size={24} />
+                </button>
+                <button
+                  data-testid="delete-button"
+                  onClick={() => handleDelete(todo)}
+                  className="
               hover:bg-red-100
               active:bg-red-200
               px-2
@@ -166,17 +170,17 @@ const TodoItem: React.FC<TodoItemProps> = ({
               rounded-md
               text-sm
               "
-            >
-              <BsTrash size={24} />
-            </button>
-          </div>
-        )}
-        {!isEdit && (
-          <div>
-            <button
-              data-testid="submit-button"
-              onClick={(e) => handleUpdate(e, todo)}
-              className="
+                >
+                  <BsTrash size={24} />
+                </button>
+              </div>
+            )}
+            {isEdit && (
+              <div>
+                <button
+                  data-testid="submit-button"
+                  onClick={(e) => handleUpdate(e, todo)}
+                  className="
               hover:text-sky-500
               active:bg-sky-200
               px-2
@@ -184,14 +188,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
               rounded-md
               text-sm
               "
-            >
-              <BiMessageSquareCheck size={24} />
-            </button>
-            <button
-              data-testid="cancel-button"
-              type="button"
-              onClick={() => setIsEdit((prev) => !prev)}
-              className="
+                >
+                  <BiMessageSquareCheck size={24} />
+                </button>
+                <button
+                  data-testid="cancel-button"
+                  type="button"
+                  onClick={() => setIsEdit((prev) => !prev)}
+                  className="
               hover:text-red-500
               active:bg-red-200
               px-2
@@ -199,12 +203,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
               rounded-md
               text-sm
               "
-            >
-              <BiMessageSquareX size={24} />
-            </button>
+                >
+                  <BiMessageSquareX size={24} />
+                </button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      </label>
     </li>
   );
 };
