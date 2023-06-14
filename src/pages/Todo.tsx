@@ -99,6 +99,22 @@ const Todo = () => {
     getTodos();
   }, [navigate]);
 
+  useEffect(() => {
+    const checkStorageToken = (event: StorageEvent) => {
+      if (event.key === 'accessToken') {
+        if (!event.newValue) {
+          navigate('/signin');
+        }
+      }
+    };
+
+    window.addEventListener('storage', checkStorageToken);
+
+    return () => {
+      window.removeEventListener('storage', checkStorageToken);
+    };
+  }, [navigate]);
+
   return (
     <main className="w-full flex flex-col justify-center items-center">
       <AddTodo
