@@ -3,11 +3,13 @@ import Home from '../pages/Home';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Todo from '../pages/Todo';
+import Error from '../pages/Error';
 
 export const routers = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
+    errorElement: <Error />,
   },
   {
     path: '/signup',
