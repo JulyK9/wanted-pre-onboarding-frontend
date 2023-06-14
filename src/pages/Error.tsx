@@ -8,7 +8,6 @@ interface RouteError {
 
 const Error: React.FC = () => {
   const error = useRouteError() as RouteError;
-  console.log('error: ', error);
 
   const navigate = useNavigate();
 
