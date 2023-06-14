@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 interface AuthProps {
   label: string;
+  pageLabel: string;
   handlerFunc: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
   email: string;
   password: string;
@@ -12,6 +13,7 @@ interface AuthProps {
 
 const Auth: React.FC<AuthProps> = ({
   label,
+  pageLabel,
   handlerFunc,
   email,
   setEmail,
@@ -111,7 +113,7 @@ const Auth: React.FC<AuthProps> = ({
         <hr className="w-full border-1 border-zinc-200 shadow-md mb-2" />
         <button
           type="submit"
-          data-testid="signup-button"
+          data-testid={`${pageLabel}-button`}
           disabled={!emailValid || !passwordValid}
           className={`
             w-full

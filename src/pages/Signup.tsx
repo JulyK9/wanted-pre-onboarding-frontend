@@ -29,6 +29,7 @@ const Signup: React.FC = () => {
   return (
     <Auth
       label="회원가입"
+      pageLabel="signup"
       handlerFunc={SubmitHandler}
       email={email}
       password={password}

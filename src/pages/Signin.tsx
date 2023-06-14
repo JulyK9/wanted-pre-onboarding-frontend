@@ -32,6 +32,7 @@ const Signin: React.FC = () => {
   return (
     <Auth
       label="로그인"
+      pageLabel="signin"
       handlerFunc={loginHandler}
       email={email}
       setEmail={setEmail}
