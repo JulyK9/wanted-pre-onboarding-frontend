@@ -102,7 +102,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
           onChange={() => handleComplete(todo)}
           className="mx-2 form-checkbox w-4 h-4 opacity-0 absolute transition duration-150"
         />
-        <div className="bg-gray-100 border rounded-sm border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-gray-500">
+        <div className="bg-gray-100 border rounded-sm border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center focus-within:border-gray-500">
           <svg
             className="fill-current hidden w-3 h-3 text-gray-600 pointer-events-none"
             version="1.1"
@@ -134,7 +134,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
               focus:bg-neutral-100
               w-full
               border-b-2
-              ml-1
               px-3
               py-2
               outline-none
@@ -142,13 +141,15 @@ const TodoItem: React.FC<TodoItemProps> = ({
               />
             )}
           </div>
-          <div className="min-w-fit">
-            {!isEdit && (
-              <div className="flex gap-1 w-full">
-                <button
-                  data-testid="modify-button"
-                  onClick={() => setIsEdit((prev) => !prev)}
-                  className="
+        </div>
+      </label>
+      <div className="min-w-fit">
+        {!isEdit && (
+          <div className="flex gap-1 w-full">
+            <button
+              data-testid="modify-button"
+              onClick={() => setIsEdit((prev) => !prev)}
+              className="
               hover:bg-sky-100
               active:bg-sky-200
               px-2
@@ -156,13 +157,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
               rounded-md
               text-sm
               "
-                >
-                  <LuEdit size={24} />
-                </button>
-                <button
-                  data-testid="delete-button"
-                  onClick={() => handleDelete(todo)}
-                  className="
+            >
+              <LuEdit size={24} />
+            </button>
+            <button
+              data-testid="delete-button"
+              onClick={() => handleDelete(todo)}
+              className="
               hover:bg-red-100
               active:bg-red-200
               px-2
@@ -170,17 +171,17 @@ const TodoItem: React.FC<TodoItemProps> = ({
               rounded-md
               text-sm
               "
-                >
-                  <BsTrash size={24} />
-                </button>
-              </div>
-            )}
-            {isEdit && (
-              <div>
-                <button
-                  data-testid="submit-button"
-                  onClick={(e) => handleUpdate(e, todo)}
-                  className="
+            >
+              <BsTrash size={24} />
+            </button>
+          </div>
+        )}
+        {isEdit && (
+          <div>
+            <button
+              data-testid="submit-button"
+              onClick={(e) => handleUpdate(e, todo)}
+              className="
               hover:text-sky-500
               active:bg-sky-200
               px-2
@@ -188,14 +189,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
               rounded-md
               text-sm
               "
-                >
-                  <BiMessageSquareCheck size={24} />
-                </button>
-                <button
-                  data-testid="cancel-button"
-                  type="button"
-                  onClick={() => setIsEdit((prev) => !prev)}
-                  className="
+            >
+              <BiMessageSquareCheck size={24} />
+            </button>
+            <button
+              data-testid="cancel-button"
+              type="button"
+              onClick={() => setIsEdit((prev) => !prev)}
+              className="
               hover:text-red-500
               active:bg-red-200
               px-2
@@ -203,14 +204,12 @@ const TodoItem: React.FC<TodoItemProps> = ({
               rounded-md
               text-sm
               "
-                >
-                  <BiMessageSquareX size={24} />
-                </button>
-              </div>
-            )}
+            >
+              <BiMessageSquareX size={24} />
+            </button>
           </div>
-        </div>
-      </label>
+        )}
+      </div>
     </li>
   );
 };
