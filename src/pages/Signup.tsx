@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../api/url';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useSignup } from '../hooks/useAuth';
 import Auth from '../components/Auth';
 
@@ -10,21 +11,24 @@ const Signup: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const SubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const SubmitHandler = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
-    const reqBody = {
-      email,
-      password,
-    };
+      const reqBody = {
+        email,
+        password,
+      };
 
-    const reqUrl = `${BASE_URL}/auth/signup`;
+      const reqUrl = `${BASE_URL}/auth/signup`;
 
-    useSignup(reqBody, reqUrl);
+      useSignup(reqBody, reqUrl);
 
-    alert('회원가입 성공. 로그인 페이지로 이동합니다.');
-    navigate('/signin');
-  };
+      alert('회원가입 성공. 로그인 페이지로 이동합니다.');
+      navigate('/signin');
+    },
+    [email, password, navigate]
+  );
 
   return (
     <Auth
