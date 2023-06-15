@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import TodoList from '../components/TodoList';
 import { BASE_URL } from '../api/url';
 import { TodoItemType } from '../types/index';
@@ -11,7 +11,7 @@ const Todo = () => {
 
   const navigate = useNavigate();
 
-  const getTodos = async () => {
+  const getTodos = useCallback(async () => {
     const access_token = localStorage.getItem('accessToken');
 
     const response = await fetch(`${BASE_URL}/todos`, {
@@ -24,7 +24,7 @@ const Todo = () => {
     const todosData = await response.json();
 
     if (response.ok) {
-      setTodos(todosData);
+      setTodos((prevTodos) => todosData);
     }
 
     if (!response.ok) {
@@ -32,9 +32,9 @@ const Todo = () => {
         todosData.message || '할일 목록을 정상적으로 가져오지 못했습니다.'
       );
     }
-  };
+  }, []);
 
-  const handleComplete = async (todoItem: TodoItemType) => {
+  const handleComplete = useCallback(async (todoItem: TodoItemType) => {
     const updatedTodoItem = {
       ...todoItem,
       isCompleted: !todoItem.isCompleted,
@@ -54,21 +54,17 @@ const Todo = () => {
     const data = await response.json();
 
     if (response.ok) {
-      const updatedTodos = todos.map((todo) => {
-        if (todo.id === todoItem.id) {
-          return data;
-        }
-        return todo;
-      });
-      setTodos(updatedTodos);
+      setTodos((todos) =>
+        todos?.map((todo) => (todo.id === todoItem.id ? data : todo))
+      );
     }
 
     if (!response.ok) {
       throw new Error(data.message || '업데이트에 문제가 발생했습니다.');
     }
-  };
+  }, []);
 
-  const handleDelete = async (todoItem: TodoItemType) => {
+  const handleDelete = useCallback(async (todoItem: TodoItemType) => {
     const access_token = localStorage.getItem('accessToken');
 
     const response = await fetch(`${BASE_URL}/todos/${todoItem.id}`, {
@@ -79,14 +75,13 @@ const Todo = () => {
     });
 
     if (response.ok) {
-      const deletedTodos = todos.filter((todo) => todo.id !== todoItem.id);
-      setTodos(deletedTodos);
+      setTodos((todos) => todos?.filter((todo) => todo.id !== todoItem.id));
     }
     if (!response.ok) {
       const data = await response.json();
       throw new Error(data.message || '정상적으로 삭제되지 않았습니다.');
     }
-  };
+  }, []);
 
   useEffect(() => {
     const access_token = localStorage.getItem('accessToken');
@@ -97,7 +92,7 @@ const Todo = () => {
     }
 
     getTodos();
-  }, [navigate]);
+  }, [getTodos, navigate]);
 
   useEffect(() => {
     const checkStorageToken = (event: StorageEvent) => {
@@ -120,7 +115,6 @@ const Todo = () => {
       <AddTodo
         todoText={todoText}
         setTodoText={setTodoText}
-        todos={todos}
         setTodos={setTodos}
       />
       <hr />
@@ -134,4 +128,4 @@ const Todo = () => {
   );
 };
 
-export default Todo;
+export default memo(Todo);

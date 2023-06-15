@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react';
 import { BASE_URL } from '../api/url';
 import { TodoItemType } from '../types/index';
 import { BsPlusLg } from 'react-icons/bs';
@@ -5,55 +6,56 @@ import { BsPlusLg } from 'react-icons/bs';
 interface AddTodoProps {
   todoText: string;
   setTodoText: React.Dispatch<React.SetStateAction<string>>;
-  todos: TodoItemType[];
   setTodos: React.Dispatch<React.SetStateAction<TodoItemType[]>>;
 }
 
 const AddTodo: React.FC<AddTodoProps> = ({
   todoText,
   setTodoText,
-  todos,
   setTodos,
 }) => {
-  const handleSubmit = async (
-    event:
-      | React.FormEvent<HTMLFormElement>
-      | React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    async (
+      event:
+        | React.FormEvent<HTMLFormElement>
+        | React.KeyboardEvent<HTMLInputElement>
+    ) => {
+      event.preventDefault();
 
-    if (!todoText) {
-      return;
-    }
+      if (!todoText) {
+        return;
+      }
 
-    const reqbody = {
-      todo: todoText,
-    };
+      const reqbody = {
+        todo: todoText,
+      };
 
-    const access_token = localStorage.getItem('accessToken');
+      const access_token = localStorage.getItem('accessToken');
 
-    const response = await fetch(`${BASE_URL}/todos`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${access_token}`,
-      },
-      body: JSON.stringify(reqbody),
-    });
+      const response = await fetch(`${BASE_URL}/todos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${access_token}`,
+        },
+        body: JSON.stringify(reqbody),
+      });
 
-    const resData = await response.json();
+      const resData = await response.json();
 
-    if (response.ok) {
-      setTodos([...todos, resData]);
-      setTodoText('');
-    }
+      if (response.ok) {
+        setTodos((todos) => [...todos, resData]);
+        setTodoText('');
+      }
 
-    if (!response.ok) {
-      throw new Error(
-        resData.message || '할일이 정상적으로 추가되지 않았습니다.'
-      );
-    }
-  };
+      if (!response.ok) {
+        throw new Error(
+          resData.message || '할일이 정상적으로 추가되지 않았습니다.'
+        );
+      }
+    },
+    [setTodoText, setTodos, todoText]
+  );
 
   const handleOnkeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -122,4 +124,4 @@ const AddTodo: React.FC<AddTodoProps> = ({
   );
 };
 
-export default AddTodo;
+export default memo(AddTodo);
