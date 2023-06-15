@@ -51,7 +51,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
     if (response.ok) {
       const resData = await response.json();
-      const editedTodoList = todos.map((todo) => {
+      const editedTodoList = todos?.map((todo) => {
         if (todo.id === todoItem.id) {
           return resData;
         }
@@ -67,6 +67,11 @@ const TodoItem: React.FC<TodoItemProps> = ({
       const resData = await response.json();
       throw new Error(resData.message || '정상적으로 업데이트되지 않았습니다.');
     }
+  };
+
+  const handleCancel = () => {
+    setIsEdit((prev) => !prev);
+    setEditTodoText(todo.todo);
   };
 
   useEffect(() => {
@@ -195,7 +200,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
             <button
               data-testid="cancel-button"
               type="button"
-              onClick={() => setIsEdit((prev) => !prev)}
+              onClick={handleCancel}
               className="
               hover:text-red-500
               active:bg-red-200
