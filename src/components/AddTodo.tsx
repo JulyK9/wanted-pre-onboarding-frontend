@@ -87,7 +87,7 @@ const AddTodo: React.FC<AddTodoProps> = ({
           type="text"
           value={todoText}
           onChange={(e) => setTodoText(e.target.value)}
-          onKeyDown={handleOnkeyPress}
+          onKeyPress={handleOnkeyPress}
           placeholder="할 일을 작성하고 엔터키나 추가 버튼을 눌러주세요"
           className="
             w-full
