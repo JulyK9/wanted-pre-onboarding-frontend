@@ -1,46 +1,49 @@
-# Getting Started with Create React App
+# 원티드 프리온보딩 프론트엔드 - 선발 과제
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 원티드 프리온보딩 프론트엔드 과제를 수행하고 결과를 제출하기 위한 레포지토리입니다.
 
-## Available Scripts
+## 🧑🏻‍💻 지원자 성명
 
-In the project directory, you can run:
+```js
+김정구;
+```
 
-### `npm start`
+## 🚀 프로젝트 실행 방법
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 1. 의존성 설치
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+npm install
+```
 
-### `npm test`
+### 2. 클라이언트 실행
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm start
+```
 
-### `npm run build`
+## 📽 데모 영상
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+배포링크 :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`https://my-simple-todos.vercel.app/`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+주요기능 시연 :
 
-### `npm run eject`
+<details><summary>회원가입</summary>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![회원가입](https://github.com/JulyK9/wanted-pre-onboarding-frontend/assets/97942837/aca0a9f6-290b-480b-9297-f1439388e349)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<details><summary>로그인</summary>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![과제_로그인](https://github.com/JulyK9/wanted-pre-onboarding-frontend/assets/97942837/fff8d754-4354-4026-a884-3b052946839d)
 
-## Learn More
+</details>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<details><summary>할일 추가, 수정, 삭제</summary>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![과제_할일 추가수정삭제](https://github.com/JulyK9/wanted-pre-onboarding-frontend/assets/97942837/04a854ca-c7c2-4d0b-ac05-6726f53d7cbb)
+
+</details>
